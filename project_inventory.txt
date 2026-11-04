@@ -1,0 +1,305 @@
+===========================================================================
+SRAM STABILITY ANALYSIS - PROJECT INVENTORY
+===========================================================================
+Project root: E:\SRAM-Stability-Analysis
+
+COMPLETE DIRECTORY AND FILE TREE
+---------------------------------------------------------------------------
+[DIR]  dashboard/
+  [DIR]  components/
+[DIR]  data/
+  [DIR]  external/
+  [DIR]  processed/
+  [DIR]  raw/
+    [FILE] sram_fault_dataset.csv (92.37 KB)
+  [FILE] sram_baseline_dataset.csv (34.27 KB)
+  [FILE] sram_cleaned_features.csv (30.70 KB)
+  [FILE] sram_converged_dataset.csv (63.31 KB)
+  [FILE] sram_engineered_features.csv (45.64 KB)
+[DIR]  data_source/
+  [DIR]  BTP-SRAM/
+    [DIR]  circuits/
+      [DIR]  core/
+        [FILE] cell_core_healthy.net (484 B)
+      [DIR]  reference/
+        [FILE] snm_hold_healthy.net (1.03 KB)
+        [FILE] snm_read_healthy.net (1.03 KB)
+      [DIR]  testbenches/
+        [FILE] stimulus_hold.net (95 B)
+        [FILE] stimulus_read.net (159 B)
+        [FILE] stimulus_read_0.net (159 B)
+        [FILE] stimulus_snm_hold.net (129 B)
+        [FILE] stimulus_snm_read.net (129 B)
+        [FILE] stimulus_write.net (123 B)
+        [FILE] stimulus_write_0.net (123 B)
+    [DIR]  data/
+      [DIR]  pilot_batch/
+        [DIR]  cores/
+          [FILE] core_bridging_2000.net (503 B)
+          [FILE] core_healthy.net (484 B)
+          [FILE] core_ro_M5_1000.net (507 B)
+          [FILE] core_vth_ac_10pct.net (611 B)
+          [FILE] core_vth_sp_10pct.net (744 B)
+        [DIR]  extended/
+          [DIR]  cores/
+            [FILE] core_bridging_2000ohm.net (503 B)
+            [FILE] core_healthy.net (484 B)
+            [FILE] core_resistive_open_M5_1000ohm.net (507 B)
+            [FILE] core_vth_drift_access_10pct.net (611 B)
+            [FILE] core_vth_drift_storage_pair_10pct.net (744 B)
+          [DIR]  read/
+            [DIR]  testbenches/
+              [FILE] tb_bridging_2000ohm_read.net (733 B)
+              [FILE] tb_healthy_read.net (705 B)
+              [FILE] tb_resistive_open_M5_1000ohm_read.net (746 B)
+              [FILE] tb_vth_drift_access_10pct_read.net (847 B)
+              [FILE] tb_vth_drift_storage_pair_10pct_read.net (986 B)
+          [DIR]  write/
+            [DIR]  testbenches/
+              [FILE] tb_bridging_2000ohm_write.net (698 B)
+              [FILE] tb_healthy_write.net (670 B)
+              [FILE] tb_resistive_open_M5_1000ohm_write.net (711 B)
+              [FILE] tb_vth_drift_access_10pct_write.net (812 B)
+              [FILE] tb_vth_drift_storage_pair_10pct_write.net (951 B)
+        [DIR]  testbenches/
+          [FILE] tb_bridging_2000ohm_hold.net (666 B)
+          [FILE] tb_healthy_hold.net (641 B)
+          [FILE] tb_healthy_hold_v2.net (646 B)
+          [FILE] tb_resistive_open_M5_1000ohm_hold.net (667 B)
+          [FILE] tb_vth_drift_access_10pct_hold.net (773 B)
+          [FILE] tb_vth_drift_storage_pair_10pct_hold.net (906 B)
+      [FILE] sram_fault_dataset.csv (92.37 KB)
+      [FILE] sram_fault_dataset_indist.csv (6.88 KB)
+      [FILE] sram_fault_dataset_ood.csv (85.89 KB)
+    [DIR]  logs/
+      [FILE] convergence_flags.csv (120.77 KB)
+      [FILE] ref_sim_flags.csv (2.15 KB)
+    [DIR]  LTSpice Circuits/
+      [FILE] HOLD_sram_6t_healthy.asc (2.92 KB)
+      [FILE] READ_sram_6t_healthy.asc (2.96 KB)
+      [FILE] SRAM_6T_butterfly_SNM_hold.asc (5.62 KB)
+      [FILE] SRAM_6T_butterfly_SNM_v4.asc (5.57 KB)
+      [FILE] WRITE_sram_6t_healthy.asc (2.95 KB)
+    [DIR]  models/
+      [FILE] histgradientboosting_invariant_leaveonecorner.pkl (632.22 KB)
+      [FILE] histgradientboosting_invariant_standard.pkl (122.36 KB)
+      [FILE] histgradientboosting_raw_leaveonecorner.pkl (821.80 KB)
+      [FILE] histgradientboosting_raw_standard.pkl (124.16 KB)
+      [FILE] linearsvm_invariant_leaveonecorner.pkl (28.66 KB)
+      [FILE] linearsvm_invariant_standard.pkl (5.92 KB)
+      [FILE] linearsvm_raw_leaveonecorner.pkl (39.45 KB)
+      [FILE] linearsvm_raw_standard.pkl (6.41 KB)
+      [FILE] logisticregression_invariant_leaveonecorner.pkl (2.55 KB)
+      [FILE] logisticregression_invariant_standard.pkl (2.55 KB)
+      [FILE] logisticregression_raw_leaveonecorner.pkl (2.77 KB)
+      [FILE] logisticregression_raw_standard.pkl (2.77 KB)
+      [FILE] nonml_baseline_invariant_leaveonecorner.pkl (138 B)
+      [FILE] nonml_baseline_invariant_standard.pkl (138 B)
+      [FILE] nonml_baseline_raw_leaveonecorner.pkl (199 B)
+      [FILE] nonml_baseline_raw_standard.pkl (199 B)
+      [FILE] randomforest_invariant_leaveonecorner.pkl (382.05 KB)
+      [FILE] randomforest_invariant_standard.pkl (136.27 KB)
+      [FILE] randomforest_raw_leaveonecorner.pkl (650.81 KB)
+      [FILE] randomforest_raw_standard.pkl (143.00 KB)
+    [DIR]  reports/
+      [DIR]  audit/
+        [FILE] clean_loco_by_corner_all_noSVM.csv (30.01 KB)
+        [FILE] clean_loco_summary_noSVM.csv (1.60 KB)
+        [FILE] clean_loco_vs_original_noSVM.csv (2.37 KB)
+        [FILE] clean_main_428_loco_by_corner_noSVM.csv (15.37 KB)
+        [FILE] clean_strict_302_loco_by_corner_noSVM.csv (14.74 KB)
+        [FILE] dataset_clean_main.csv (93.18 KB)
+        [FILE] dataset_clean_strict.csv (65.72 KB)
+        [FILE] excluded_rows.csv (1.83 KB)
+        [FILE] final_comparison_figure.png (95.18 KB)
+        [FILE] final_comparison_table.csv (2.63 KB)
+        [FILE] nonconverged_by_reason.csv (18.96 KB)
+      [DIR]  figures/
+        [FILE] fig1_feature_dispersion_comparison.png (260.40 KB)
+        [FILE] fig1b_fault_dispersion.png (246.26 KB)
+        [FILE] fig2_cross_pvt_loco_accuracy.png (146.33 KB)
+        [FILE] fig3_rf_pvt_corner_heatmap.png (286.21 KB)
+        [FILE] fig3b_rf_grid.png (145.96 KB)
+        [FILE] fig4_shap_summary.png (227.74 KB)
+        [FILE] fig4b_shap_class_importance.png (278.85 KB)
+        [FILE] methodology_flowchart.png (378.66 KB)
+        [FILE] snm_butterfly_diagram.png (212.41 KB)
+        [FILE] sram_architecture_faults.png (162.33 KB)
+      [DIR]  final_results/
+        [FILE] comparison_table.csv (12.44 KB)
+        [FILE] fault_feature_spread.csv (861 B)
+        [FILE] feature_spread_comparison.csv (270 B)
+        [FILE] loco_summary.csv (748 B)
+        [FILE] shap_feature_importance.csv (2.06 KB)
+      [FILE] BTP_Mid_Semester_Presentation.pptx (1.05 MB)
+      [FILE] BTP_Mid_Semester_Presentation_Guide.md (12.63 KB)
+      [FILE] validation_checkpoints_report.md (3.33 KB)
+    [DIR]  scripts/
+      [FILE] apply_row_policy.py (9.47 KB)
+      [FILE] audit_nonconverged.py (8.38 KB)
+      [FILE] build_btp_presentation.py (23.27 KB)
+      [FILE] demo_feature_extraction.py (6.67 KB)
+      [FILE] demo_snm_features.py (6.22 KB)
+      [FILE] generate_presentation_assets.py (9.04 KB)
+      [FILE] make_final_comparison.py (7.65 KB)
+      [FILE] profile_loco_clean.py (14.50 KB)
+      [FILE] redraw_fig1_faults.py (3.30 KB)
+      [FILE] redraw_fig3_grid.py (2.50 KB)
+      [FILE] rerun_loco_clean.py (9.80 KB)
+      [FILE] rerun_loco_clean_noSVM.py (10.30 KB)
+      [FILE] run_pilot_batch.py (7.60 KB)
+      [FILE] run_pilot_extended.py (13.74 KB)
+      [FILE] run_shap_analysis.py (6.42 KB)
+      [FILE] verify_checkpoints.py (10.65 KB)
+      [FILE] verify_dataset_physics.py (4.56 KB)
+    [DIR]  src/
+      [FILE] __init__.py (0 B)
+      [FILE] baseline_detector.py (9.64 KB)
+      [FILE] cross_pvt_analysis.py (7.16 KB)
+      [FILE] fault_injection.py (12.04 KB)
+      [FILE] feature_extractor.py (11.75 KB)
+      [FILE] generate_dataset.py (26.87 KB)
+      [FILE] ml_pipeline.py (10.97 KB)
+      [FILE] simulation_runner.py (20.61 KB)
+      [FILE] snm_extraction.py (3.51 KB)
+      [FILE] testbench_composer.py (14.68 KB)
+      [FILE] utils.py (1.73 KB)
+    [DIR]  tests/
+      [FILE] __init__.py (0 B)
+      [FILE] test_baseline_detector.py (2.70 KB)
+      [FILE] test_dataset_generator.py (1.77 KB)
+      [FILE] test_fault_injection.py (18.59 KB)
+      [FILE] test_feature_extractor.py (2.39 KB)
+      [FILE] test_ml_pipeline.py (4.29 KB)
+      [FILE] test_pvt_composition.py (1.45 KB)
+      [FILE] test_simulation_runner.py (4.31 KB)
+      [FILE] test_snm_composition.py (6.38 KB)
+      [FILE] test_snm_extraction.py (7.60 KB)
+      [FILE] test_snm_features.py (3.89 KB)
+      [FILE] test_testbench_composer.py (4.24 KB)
+    [DIR]  validation/
+      [DIR]  snm_manual_check/
+        [DIR]  raw/
+          [FILE] snm_hold_healthy_621e25f3.net (1.03 KB)
+          [FILE] snm_read_healthy_9297259c.net (1.03 KB)
+        [FILE] results.md (2.57 KB)
+    [FILE] .gitignore (628 B)
+    [FILE] config.example.yaml (1.00 KB)
+    [FILE] context.md (14.61 KB)
+    [FILE] Phase2.md (17.76 KB)
+    [FILE] PLAN (3).md (21.16 KB)
+    [FILE] PROJECT_DOCUMENTATION.md (26.26 KB)
+    [FILE] pytest.ini (47 B)
+    [FILE] README.md (6.19 KB)
+[DIR]  models/
+  [FILE] feature_columns.pkl (184 B)
+  [FILE] hold_snm_regression.pkl (1.51 MB)
+  [FILE] read_snm_regression.pkl (3.26 KB)
+  [FILE] snm_regression_features.pkl (163 B)
+  [FILE] sram_fault_classifier.pkl (1.14 MB)
+[DIR]  notebooks/
+  [FILE] 01_data_understanding.ipynb (631.77 KB)
+  [FILE] 02_data_cleaning.ipynb (15.11 KB)
+  [FILE] 03_exploratory_data_analysis.ipynb (4.52 KB)
+  [FILE] 04_statistical_analysis.ipynb (313.40 KB)
+  [FILE] 05_feature_engineering.ipynb (428.20 KB)
+  [FILE] 06_snm_regression.ipynb (75.26 KB)
+  [FILE] 07_failure_classification.ipynb (1.14 MB)
+  [FILE] 08_model_explainability.ipynb (58 B)
+[DIR]  reports/
+  [DIR]  figures/
+    [FILE] hold_snm_final.png (170.68 KB)
+    [FILE] read_snm_final.png (229.61 KB)
+  [DIR]  model_results/
+  [FILE] descriptive_statistics.csv (3.37 KB)
+  [FILE] dunn_posthoc_results.csv (5.72 KB)
+  [FILE] effect_size_analysis.csv (8.02 KB)
+  [FILE] fault_class_statistical_summary.csv (2.23 KB)
+  [FILE] final_snm_regression_results.csv (441 B)
+  [FILE] hold_snm_oof_predictions.csv (23.55 KB)
+  [FILE] model_comparison.csv (235 B)
+  [FILE] read_snm_oof_predictions.csv (23.92 KB)
+  [FILE] sram_spearman_correlation.csv (2.40 KB)
+[DIR]  src/
+  [DIR]  analysis/
+    [FILE] __init__.py (0 B)
+  [DIR]  data/
+    [FILE] __init__.py (0 B)
+  [DIR]  evaluation/
+    [FILE] __init__.py (0 B)
+  [DIR]  features/
+    [FILE] __init__.py (0 B)
+  [DIR]  models/
+    [FILE] __init__.py (0 B)
+  [FILE] __init__.py (0 B)
+[DIR]  tests/
+[FILE] .gitignore (312 B)
+[FILE] check_dataset.py (613 B)
+[FILE] op.py (3.51 KB)
+[FILE] push_to_github.py (3.03 KB)
+[FILE] README.md (0 B)
+[FILE] requirements.txt (5.18 KB)
+
+===========================================================================
+PROJECT SUMMARY
+===========================================================================
+Total files: 187
+Total size: 13.44 MB
+
+FILE TYPES
+---------------------------------------------------------------------------
+.py: 49 files
+.net: 38 files
+.csv: 34 files
+.pkl: 25 files
+.png: 13 files
+.md: 9 files
+.ipynb: 8 files
+.asc: 5 files
+[no extension]: 2 files
+.pptx: 1 files
+.yaml: 1 files
+.ini: 1 files
+.txt: 1 files
+
+FOLDER SUMMARY
+---------------------------------------------------------------------------
+.: 6 files, 12.62 KB
+data: 4 files, 173.92 KB
+data\raw: 1 files, 92.37 KB
+data_source\BTP-SRAM: 8 files, 87.65 KB
+data_source\BTP-SRAM\LTSpice Circuits: 5 files, 20.01 KB
+data_source\BTP-SRAM\circuits\core: 1 files, 484 B
+data_source\BTP-SRAM\circuits\reference: 2 files, 2.06 KB
+data_source\BTP-SRAM\circuits\testbenches: 7 files, 917 B
+data_source\BTP-SRAM\data: 3 files, 185.14 KB
+data_source\BTP-SRAM\data\pilot_batch\cores: 5 files, 2.78 KB
+data_source\BTP-SRAM\data\pilot_batch\extended\cores: 5 files, 2.78 KB
+data_source\BTP-SRAM\data\pilot_batch\extended\read\testbenches: 5 files, 3.92 KB
+data_source\BTP-SRAM\data\pilot_batch\extended\write\testbenches: 5 files, 3.75 KB
+data_source\BTP-SRAM\data\pilot_batch\testbenches: 6 files, 4.20 KB
+data_source\BTP-SRAM\logs: 2 files, 122.92 KB
+data_source\BTP-SRAM\models: 20 files, 3.03 MB
+data_source\BTP-SRAM\reports: 3 files, 1.06 MB
+data_source\BTP-SRAM\reports\audit: 11 files, 341.58 KB
+data_source\BTP-SRAM\reports\figures: 10 files, 2.29 MB
+data_source\BTP-SRAM\reports\final_results: 5 files, 16.33 KB
+data_source\BTP-SRAM\scripts: 17 files, 154.07 KB
+data_source\BTP-SRAM\src: 11 files, 118.95 KB
+data_source\BTP-SRAM\tests: 12 files, 57.60 KB
+data_source\BTP-SRAM\validation\snm_manual_check: 1 files, 2.57 KB
+data_source\BTP-SRAM\validation\snm_manual_check\raw: 2 files, 2.05 KB
+models: 5 files, 2.65 MB
+notebooks: 8 files, 2.58 MB
+reports: 9 files, 69.88 KB
+reports\figures: 2 files, 400.29 KB
+src: 1 files, 0 B
+src\analysis: 1 files, 0 B
+src\data: 1 files, 0 B
+src\evaluation: 1 files, 0 B
+src\features: 1 files, 0 B
+src\models: 1 files, 0 B
+
+FILES LARGER THAN 100 MB
+---------------------------------------------------------------------------
+None found.
