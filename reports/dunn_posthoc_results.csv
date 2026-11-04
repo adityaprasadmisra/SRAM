@@ -1,0 +1,91 @@
+Feature,Class 1,Class 2,Adjusted P Value,Significant
+i_ddq_uA,Healthy,Resistive Open,0.9203432689737072,False
+i_ddq_uA,Healthy,Bridging,1.8828986551168343e-06,True
+i_ddq_uA,Healthy,Storage Vth Drift,0.1084327039768664,False
+i_ddq_uA,Healthy,Access Vth Drift,0.9203432689737072,False
+i_ddq_uA,Resistive Open,Bridging,1.2610590838434322e-25,True
+i_ddq_uA,Resistive Open,Storage Vth Drift,0.0014933688237151735,True
+i_ddq_uA,Resistive Open,Access Vth Drift,0.9952449152174442,False
+i_ddq_uA,Bridging,Storage Vth Drift,8.708581407982593e-33,True
+i_ddq_uA,Bridging,Access Vth Drift,3.317773014424721e-20,True
+i_ddq_uA,Storage Vth Drift,Access Vth Drift,0.005929360443533396,True
+t_write_ps,Healthy,Resistive Open,0.024294705716721418,True
+t_write_ps,Healthy,Bridging,2.3670172144378524e-14,True
+t_write_ps,Healthy,Storage Vth Drift,0.791954601151268,False
+t_write_ps,Healthy,Access Vth Drift,0.01393943711243898,True
+t_write_ps,Resistive Open,Bridging,2.892730036863031e-29,True
+t_write_ps,Resistive Open,Storage Vth Drift,1.0971227094084911e-07,True
+t_write_ps,Resistive Open,Access Vth Drift,0.5254626711567117,False
+t_write_ps,Bridging,Storage Vth Drift,1.5311220954928517e-46,True
+t_write_ps,Bridging,Access Vth Drift,1.7572472774813407e-20,True
+t_write_ps,Storage Vth Drift,Access Vth Drift,1.6526107698743374e-07,True
+i_write_peak_mA,Healthy,Resistive Open,0.9960634502278086,False
+i_write_peak_mA,Healthy,Bridging,0.782175637287862,False
+i_write_peak_mA,Healthy,Storage Vth Drift,0.07424631994423178,False
+i_write_peak_mA,Healthy,Access Vth Drift,0.7481101871321494,False
+i_write_peak_mA,Resistive Open,Bridging,0.7331775446622465,False
+i_write_peak_mA,Resistive Open,Storage Vth Drift,2.781932881972097e-05,True
+i_write_peak_mA,Resistive Open,Access Vth Drift,0.34306759968863165,False
+i_write_peak_mA,Bridging,Storage Vth Drift,0.007097720162260166,True
+i_write_peak_mA,Bridging,Access Vth Drift,0.782175637287862,False
+i_write_peak_mA,Storage Vth Drift,Access Vth Drift,0.013495670465530915,True
+dv_bl_strobe_mV,Healthy,Resistive Open,0.6238371618907697,False
+dv_bl_strobe_mV,Healthy,Bridging,1.2461728040022584e-12,True
+dv_bl_strobe_mV,Healthy,Storage Vth Drift,0.26272234401880556,False
+dv_bl_strobe_mV,Healthy,Access Vth Drift,0.020125451595849914,True
+dv_bl_strobe_mV,Resistive Open,Bridging,5.3980125995810776e-43,True
+dv_bl_strobe_mV,Resistive Open,Storage Vth Drift,0.15547661720345712,False
+dv_bl_strobe_mV,Resistive Open,Access Vth Drift,2.4684872433970613e-05,True
+dv_bl_strobe_mV,Bridging,Storage Vth Drift,2.9749442341444247e-27,True
+dv_bl_strobe_mV,Bridging,Access Vth Drift,2.246774197750773e-17,True
+dv_bl_strobe_mV,Storage Vth Drift,Access Vth Drift,0.020125451595849914,True
+t_sense_ps,Healthy,Resistive Open,0.8374569321414757,False
+t_sense_ps,Healthy,Bridging,6.53109486761757e-12,True
+t_sense_ps,Healthy,Storage Vth Drift,0.4789665439809435,False
+t_sense_ps,Healthy,Access Vth Drift,0.019012415784971797,True
+t_sense_ps,Resistive Open,Bridging,1.5841513426850422e-43,True
+t_sense_ps,Resistive Open,Storage Vth Drift,0.2533965157882598,False
+t_sense_ps,Resistive Open,Access Vth Drift,1.7271086342989623e-06,True
+t_sense_ps,Bridging,Storage Vth Drift,1.1087482130428784e-28,True
+t_sense_ps,Bridging,Access Vth Drift,5.609139286869815e-16,True
+t_sense_ps,Storage Vth Drift,Access Vth Drift,0.0026473183522193423,True
+v_bump_mV,Healthy,Resistive Open,0.9974628909559959,False
+v_bump_mV,Healthy,Bridging,1.1714157311625662e-08,True
+v_bump_mV,Healthy,Storage Vth Drift,0.17541542995593926,False
+v_bump_mV,Healthy,Access Vth Drift,0.009697503792538276,True
+v_bump_mV,Resistive Open,Bridging,2.1215062569685512e-32,True
+v_bump_mV,Resistive Open,Storage Vth Drift,0.0031890250889077907,True
+v_bump_mV,Resistive Open,Access Vth Drift,1.533153689730131e-08,True
+v_bump_mV,Bridging,Storage Vth Drift,3.790658806776839e-15,True
+v_bump_mV,Bridging,Access Vth Drift,1.0499626757046144e-51,True
+v_bump_mV,Storage Vth Drift,Access Vth Drift,6.19457649721214e-14,True
+snm_hold_v,Healthy,Resistive Open,1.0,False
+snm_hold_v,Healthy,Bridging,1.4898036285123903e-09,True
+snm_hold_v,Healthy,Storage Vth Drift,1.0,False
+snm_hold_v,Healthy,Access Vth Drift,1.0,False
+snm_hold_v,Resistive Open,Bridging,3.453634847855333e-36,True
+snm_hold_v,Resistive Open,Storage Vth Drift,1.0,False
+snm_hold_v,Resistive Open,Access Vth Drift,1.0,False
+snm_hold_v,Bridging,Storage Vth Drift,1.7067190124441463e-26,True
+snm_hold_v,Bridging,Access Vth Drift,7.003389383056767e-28,True
+snm_hold_v,Storage Vth Drift,Access Vth Drift,1.0,False
+snm_read_v,Healthy,Resistive Open,0.9886326992913492,False
+snm_read_v,Healthy,Bridging,8.868665378177851e-08,True
+snm_read_v,Healthy,Storage Vth Drift,0.052138483529866546,False
+snm_read_v,Healthy,Access Vth Drift,0.25280600694649397,False
+snm_read_v,Resistive Open,Bridging,1.377175285607275e-28,True
+snm_read_v,Resistive Open,Storage Vth Drift,2.075938747085042e-05,True
+snm_read_v,Resistive Open,Access Vth Drift,0.011964730024701678,True
+snm_read_v,Bridging,Storage Vth Drift,1.219903618875817e-09,True
+snm_read_v,Bridging,Access Vth Drift,1.8721555359587576e-32,True
+snm_read_v,Storage Vth Drift,Access Vth Drift,3.2503027311356782e-09,True
+snm_asym_read_v,Healthy,Resistive Open,9.075200441458092e-09,True
+snm_asym_read_v,Healthy,Bridging,1.0,False
+snm_asym_read_v,Healthy,Storage Vth Drift,1.0,False
+snm_asym_read_v,Healthy,Access Vth Drift,1.0,False
+snm_asym_read_v,Resistive Open,Bridging,2.855348210178563e-30,True
+snm_asym_read_v,Resistive Open,Storage Vth Drift,5.6376105339059275e-34,True
+snm_asym_read_v,Resistive Open,Access Vth Drift,5.6376105339059275e-34,True
+snm_asym_read_v,Bridging,Storage Vth Drift,1.0,False
+snm_asym_read_v,Bridging,Access Vth Drift,1.0,False
+snm_asym_read_v,Storage Vth Drift,Access Vth Drift,1.0,False
