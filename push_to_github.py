@@ -1,121 +1,76 @@
 
-import os
 import subprocess
 import sys
+from pathlib import Path
 
-# Project configuration
-PROJECT_PATH = r"E:\SRAM-Stability-Analysis"
-GITHUB_REPO = (
-    "https://github.com/adityaprasadmisra/"
-    "SRAM-Error-Analysis.git"
-)
+PROJECT_DIR = Path(r"E:\SRAM-Stability-Analysis")
+REPO_URL = "https://github.com/adityaprasadmisra/SRAM.git"
 BRANCH = "main"
-COMMIT_MESSAGE = "Initial commit: SRAM Error Analysis and ML pipeline"
 
 
-def run_command(command):
+def run(command):
     print(f"\n>>> {' '.join(command)}")
-
     result = subprocess.run(
         command,
-        cwd=PROJECT_PATH,
+        cwd=PROJECT_DIR,
         text=True
     )
 
     if result.returncode != 0:
-        raise RuntimeError(
-            f"Command failed: {' '.join(command)}"
-        )
-
-    return result
+        print("\nCommand failed. Check the error above.")
+        sys.exit(result.returncode)
 
 
 def main():
-    try:
-        if not os.path.isdir(PROJECT_PATH):
-            raise FileNotFoundError(
-                f"Project folder not found: {PROJECT_PATH}"
-            )
+    if not PROJECT_DIR.exists():
+        print("Project directory not found!")
+        return
 
-        os.chdir(PROJECT_PATH)
+    # Initialize Git if necessary
+    if not (PROJECT_DIR / ".git").exists():
+        run(["git", "init"])
 
-        print("=" * 55)
-        print("       SRAM PROJECT - GITHUB UPLOADER")
-        print("=" * 55)
+    # Set branch
+    run(["git", "branch", "-M", BRANCH])
 
-        # Check Git installation
-        run_command(["git", "--version"])
+    # Configure remote
+    remotes = subprocess.run(
+        ["git", "remote"],
+        cwd=PROJECT_DIR,
+        capture_output=True,
+        text=True
+    ).stdout.split()
 
-        # Initialize repository
-        if not os.path.isdir(".git"):
-            run_command(["git", "init"])
+    if "origin" in remotes:
+        run(["git", "remote", "set-url", "origin", REPO_URL])
+    else:
+        run(["git", "remote", "add", "origin", REPO_URL])
 
-        # Set branch
-        run_command(["git", "branch", "-M", BRANCH])
+    # Stage entire project
+    run(["git", "add", "-A"])
 
-        # Configure remote
-        remote = subprocess.run(
-            ["git", "remote", "get-url", "origin"],
-            cwd=PROJECT_PATH,
-            capture_output=True,
-            text=True
-        )
+    # Commit
+    status = subprocess.run(
+        ["git", "diff", "--cached", "--quiet"],
+        cwd=PROJECT_DIR
+    )
 
-        if remote.returncode == 0:
-            run_command([
-                "git", "remote", "set-url",
-                "origin", GITHUB_REPO
-            ])
-        else:
-            run_command([
-                "git", "remote", "add",
-                "origin", GITHUB_REPO
-            ])
-
-        # Stage all files
-        run_command(["git", "add", "-A"])
-
-        # Display staged files
-        print("\nFiles prepared for upload:")
-        run_command(["git", "status", "--short"])
-
-        # Confirm before committing and pushing
-        confirm = input(
-            "\nProceed with commit and GitHub push? (y/n): "
-        ).strip().lower()
-
-        if confirm != "y":
-            print("Upload cancelled.")
-            return
-
-        # Check whether there are staged changes
-        staged = subprocess.run(
-            ["git", "diff", "--cached", "--quiet"],
-            cwd=PROJECT_PATH
-        )
-
-        if staged.returncode == 1:
-            run_command([
-                "git", "commit", "-m", COMMIT_MESSAGE
-            ])
-        elif staged.returncode == 0:
-            print("\nNo new changes to commit.")
-        else:
-            raise RuntimeError("Could not inspect staged changes.")
-
-        # Push to GitHub
-        run_command([
-            "git", "push", "-u", "origin", BRANCH
+    if status.returncode == 1:
+        run([
+            "git", "commit", "-m",
+            "Initial commit: SRAM Stability Analysis"
         ])
+    elif status.returncode == 0:
+        print("\nNo new changes to commit.")
+    else:
+        print("Could not check staged changes.")
+        return
 
-        print("\n" + "=" * 55)
-        print("       PROJECT PUSHED SUCCESSFULLY!")
-        print("=" * 55)
-        print(f"Repository: {GITHUB_REPO}")
+    # Push
+    run(["git", "push", "-u", "origin", BRANCH])
 
-    except Exception as error:
-        print(f"\nERROR: {error}")
-        sys.exit(1)
+    print("\nSUCCESS! Project pushed to GitHub.")
+    print(REPO_URL)
 
 
 if __name__ == "__main__":
