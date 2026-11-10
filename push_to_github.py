@@ -3,74 +3,128 @@ import subprocess
 import sys
 from pathlib import Path
 
-PROJECT_DIR = Path(r"E:\SRAM-Stability-Analysis")
-REPO_URL = "https://github.com/adityaprasadmisra/SRAM.git"
+PROJECT = Path(r"E:\SRAM-Stability-Analysis")
+REPO = "https://github.com/adityaprasadmisra/SRAM.git"
 BRANCH = "main"
 
+EXCLUDED_DIRS = {
+    ".git",
+    "venv",
+    ".venv",
+    "env",
+    "__pycache__",
+    ".pytest_cache",
+    ".ipynb_checkpoints",
+    "node_modules"
+}
 
-def run(command):
-    print(f"\n>>> {' '.join(command)}")
+EXCLUDED_FILES = {
+    ".env"
+}
+
+
+def run(command, check=True):
+    print("\n>", " ".join(map(str, command)))
+
     result = subprocess.run(
         command,
-        cwd=PROJECT_DIR,
+        cwd=PROJECT,
         text=True
     )
 
-    if result.returncode != 0:
-        print("\nCommand failed. Check the error above.")
+    if check and result.returncode != 0:
+        print("\nERROR: Command failed.")
         sys.exit(result.returncode)
+
+    return result.returncode
 
 
 def main():
-    if not PROJECT_DIR.exists():
-        print("Project directory not found!")
+    if not PROJECT.exists():
+        print("Project directory does not exist!")
         return
 
-    # Initialize Git if necessary
-    if not (PROJECT_DIR / ".git").exists():
+    # Initialize Git
+    if not (PROJECT / ".git").exists():
         run(["git", "init"])
 
-    # Set branch
     run(["git", "branch", "-M", BRANCH])
 
-    # Configure remote
+    # Configure GitHub remote
     remotes = subprocess.run(
         ["git", "remote"],
-        cwd=PROJECT_DIR,
+        cwd=PROJECT,
         capture_output=True,
         text=True
     ).stdout.split()
 
     if "origin" in remotes:
-        run(["git", "remote", "set-url", "origin", REPO_URL])
+        run(["git", "remote", "set-url", "origin", REPO])
     else:
-        run(["git", "remote", "add", "origin", REPO_URL])
+        run(["git", "remote", "add", "origin", REPO])
 
-    # Stage entire project
-    run(["git", "add", "-A"])
+    # Collect all project files
+    files = []
+
+    for path in PROJECT.rglob("*"):
+        if not path.is_file():
+            continue
+
+        relative = path.relative_to(PROJECT)
+
+        if any(part in EXCLUDED_DIRS for part in relative.parts):
+            continue
+
+        if path.name in EXCLUDED_FILES:
+            continue
+
+        files.append(str(relative))
+
+    print(f"\nTotal files found: {len(files)}")
+
+    # Force-add every eligible file, including ignored images/data
+    for i in range(0, len(files), 50):
+        batch = files[i:i + 50]
+        run(["git", "add", "-f", "--"] + batch)
 
     # Commit
     status = subprocess.run(
         ["git", "diff", "--cached", "--quiet"],
-        cwd=PROJECT_DIR
+        cwd=PROJECT
     )
 
     if status.returncode == 1:
         run([
-            "git", "commit", "-m",
-            "Initial commit: SRAM Stability Analysis"
+            "git", "commit",
+            "-m", "Upload complete SRAM Stability Analysis project"
         ])
     elif status.returncode == 0:
         print("\nNo new changes to commit.")
     else:
-        print("Could not check staged changes.")
+        print("Could not inspect staged changes.")
         return
 
-    # Push
+    # Check whether remote main already has commits
+    remote = subprocess.run(
+        ["git", "ls-remote", "--heads", "origin", BRANCH],
+        cwd=PROJECT,
+        capture_output=True,
+        text=True
+    )
+
+    if remote.returncode != 0:
+        print(remote.stderr)
+        return
+
+    if remote.stdout.strip():
+        print("\nRemote main already exists. Rebasing local commits...")
+        run(["git", "pull", "--rebase", "origin", BRANCH])
+
+    # Push everything
     run(["git", "push", "-u", "origin", BRANCH])
 
-    print("\nSUCCESS! Project pushed to GitHub.")
-    print(REPO_URL)
+    print("\nPROJECT SUCCESSFULLY PUSHED!")
+    print(REPO)
 
 
 if __name__ == "__main__":
